@@ -19,7 +19,13 @@
                 <span id="ai-score">0</span>
             </div>
         </div>
-        <canvas id="gameCanvas"></canvas>
+        <div class="game-container">
+            <canvas id="gameCanvas"></canvas>
+            <div id="pause-overlay" class="pause-overlay hidden">
+                <div class="pause-text">PAUSED</div>
+            </div>
+        </div>
+        <button id="pause-btn" class="pause-btn">Pause</button>
         <div class="controls">
             <p>Use mouse or arrow keys to move your paddle</p>
         </div>

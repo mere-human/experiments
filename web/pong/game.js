@@ -55,9 +55,19 @@ let mouseY = canvas.height / 2;
 let previousMouseY = canvas.height / 2;
 let mouseMoved = false;
 
+// Game state
+let isPaused = false;
+let animationFrameId = null;
+
 // Keyboard events
 document.addEventListener('keydown', (e) => {
     keys[e.key] = true;
+    
+    // Handle Escape key for pause/resume
+    if (e.key === 'Escape') {
+        e.preventDefault();
+        togglePause();
+    }
 });
 
 document.addEventListener('keyup', (e) => {
@@ -234,14 +244,57 @@ function draw() {
     document.getElementById('ai-score').textContent = ai.score;
 }
 
+// Pause the game (without toggling)
+function pauseGame() {
+    if (!isPaused) {
+        isPaused = true;
+        const pauseOverlay = document.getElementById('pause-overlay');
+        const pauseBtn = document.getElementById('pause-btn');
+        pauseOverlay.classList.remove('hidden');
+        pauseBtn.textContent = 'Resume';
+    }
+}
+
+// Resume the game
+function resumeGame() {
+    if (isPaused) {
+        isPaused = false;
+        const pauseOverlay = document.getElementById('pause-overlay');
+        const pauseBtn = document.getElementById('pause-btn');
+        pauseOverlay.classList.add('hidden');
+        pauseBtn.textContent = 'Pause';
+        // Resume game loop
+        gameLoop();
+    }
+}
+
+// Toggle pause state
+function togglePause() {
+    if (isPaused) {
+        resumeGame();
+    } else {
+        pauseGame();
+    }
+}
+
 // Game loop
 function gameLoop() {
-    updatePlayer();
-    updateAI();
-    updateBall();
-    draw();
-    requestAnimationFrame(gameLoop);
+    if (!isPaused) {
+        updatePlayer();
+        updateAI();
+        updateBall();
+        draw();
+        animationFrameId = requestAnimationFrame(gameLoop);
+    }
 }
+
+// Pause button click handler
+document.getElementById('pause-btn').addEventListener('click', togglePause);
+
+// Auto-pause when tab loses focus
+window.addEventListener('blur', () => {
+    pauseGame();
+});
 
 // Start the game
 resetBall();
