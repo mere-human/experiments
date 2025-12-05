@@ -45,6 +45,8 @@ const ball = {
 // Input handling
 let keys = {};
 let mouseY = canvas.height / 2;
+let previousMouseY = canvas.height / 2;
+let mouseMoved = false;
 
 // Keyboard events
 document.addEventListener('keydown', (e) => {
@@ -59,24 +61,34 @@ document.addEventListener('keyup', (e) => {
 canvas.addEventListener('mousemove', (e) => {
     const rect = canvas.getBoundingClientRect();
     mouseY = e.clientY - rect.top;
+    mouseMoved = true;
 });
 
 // Update player paddle position
 function updatePlayer() {
-    // Keyboard controls
+    // Check if any keyboard keys are pressed
+    const keyboardPressed = keys['ArrowUp'] || keys['ArrowDown'] || keys['w'] || keys['W'] || keys['s'] || keys['S'];
+
+    // Keyboard controls (priority)
     if (keys['ArrowUp'] || keys['w'] || keys['W']) {
         player.y -= player.speed;
+        mouseMoved = false; // Disable mouse control when using keyboard
     }
     if (keys['ArrowDown'] || keys['s'] || keys['S']) {
         player.y += player.speed;
+        mouseMoved = false; // Disable mouse control when using keyboard
     }
     
-    // Mouse controls
-    const targetY = mouseY - player.height / 2;
-    if (Math.abs(targetY - player.y) > 2) {
-        player.y += (targetY - player.y) * 0.1;
+    // Mouse controls (only when mouse is actively moving and keyboard is not being used)
+    if (!keyboardPressed && mouseMoved && mouseY !== previousMouseY) {
+        const targetY = mouseY - player.height / 2;
+        player.y = targetY; // Direct positioning for responsive mouse control
+        mouseMoved = false; // Reset flag after applying mouse control
     }
     
+    // Update previous mouse position
+    previousMouseY = mouseY;
+
     // Keep paddle on screen
     if (player.y < 0) {
         player.y = 0;
