@@ -33,13 +33,20 @@ const ai = {
 };
 
 // Ball
+const baseSpeed = 5;
+const speedIncreaseRate = 0.02; // Speed multiplier increase per second
+const maxSpeedMultiplier = 2.5; // Maximum speed multiplier
+const speedIncreaseInterval = 2; // Increase speed every N seconds
+let speedMultiplier = 1;
+let lastSpeedIncreaseTime = Date.now();
+
 const ball = {
     x: canvas.width / 2,
     y: canvas.height / 2,
     width: ballSize,
     height: ballSize,
-    speedX: 5,
-    speedY: 5
+    speedX: baseSpeed,
+    speedY: baseSpeed
 };
 
 // Input handling
@@ -119,8 +126,33 @@ function updateAI() {
     }
 }
 
+// Increase ball speed over time
+function increaseBallSpeed() {
+    const currentTime = Date.now();
+    const timeDelta = (currentTime - lastSpeedIncreaseTime) / 1000; // Convert to seconds
+    
+    if (timeDelta >= speedIncreaseInterval) {
+        // Increase speed multiplier
+        const oldMultiplier = speedMultiplier;
+        speedMultiplier = Math.min(speedMultiplier + speedIncreaseRate, maxSpeedMultiplier);
+        
+        // Only update if multiplier actually increased
+        if (speedMultiplier > oldMultiplier) {
+            // Proportionally increase speed while preserving direction
+            const speedRatio = speedMultiplier / oldMultiplier;
+            ball.speedX *= speedRatio;
+            ball.speedY *= speedRatio;
+            
+            lastSpeedIncreaseTime = currentTime;
+        }
+    }
+}
+
 // Update ball position
 function updateBall() {
+    // Gradually increase speed over time
+    increaseBallSpeed();
+    
     ball.x += ball.speedX;
     ball.y += ball.speedY;
     
@@ -134,10 +166,10 @@ function updateBall() {
         ball.y + ball.height >= player.y &&
         ball.y <= player.y + player.height &&
         ball.speedX < 0) {
-        ball.speedX = -ball.speedX;
+        ball.speedX = -ball.speedX; // Reverse direction, speed already has multiplier applied
         // Add slight angle based on where ball hits paddle
         const hitPos = (ball.y - player.y) / player.height;
-        ball.speedY = (hitPos - 0.5) * 10;
+        ball.speedY = (hitPos - 0.5) * 10 * speedMultiplier;
     }
     
     // Ball collision with AI paddle
@@ -145,10 +177,10 @@ function updateBall() {
         ball.y + ball.height >= ai.y &&
         ball.y <= ai.y + ai.height &&
         ball.speedX > 0) {
-        ball.speedX = -ball.speedX;
+        ball.speedX = -ball.speedX; // Reverse direction, speed already has multiplier applied
         // Add slight angle based on where ball hits paddle
         const hitPos = (ball.y - ai.y) / ai.height;
-        ball.speedY = (hitPos - 0.5) * 10;
+        ball.speedY = (hitPos - 0.5) * 10 * speedMultiplier;
     }
     
     // Score points
@@ -166,8 +198,11 @@ function updateBall() {
 function resetBall() {
     ball.x = canvas.width / 2;
     ball.y = canvas.height / 2;
-    ball.speedX = (Math.random() > 0.5 ? 1 : -1) * 5;
-    ball.speedY = (Math.random() > 0.5 ? 1 : -1) * 5;
+    // Reset speed multiplier when ball resets (optional - comment out to keep speed increasing)
+    // speedMultiplier = 1;
+    ball.speedX = (Math.random() > 0.5 ? 1 : -1) * baseSpeed * speedMultiplier;
+    ball.speedY = (Math.random() > 0.5 ? 1 : -1) * baseSpeed * speedMultiplier;
+    lastSpeedIncreaseTime = Date.now();
 }
 
 // Draw game objects
