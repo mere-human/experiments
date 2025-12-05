@@ -59,6 +59,39 @@ let mouseMoved = false;
 let isPaused = false;
 let animationFrameId = null;
 
+// Sound system (minimal - using Web Audio API)
+const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+// Resume audio context on first user interaction (required by some browsers)
+let audioInitialized = false;
+function initAudio() {
+    if (!audioInitialized && audioContext.state === 'suspended') {
+        audioContext.resume();
+        audioInitialized = true;
+    }
+}
+
+function playSound(frequency, duration = 0.1, type = 'sine') {
+    if (isPaused) return; // Don't play sounds when paused
+    
+    initAudio(); // Ensure audio is initialized
+    
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    oscillator.frequency.value = frequency;
+    oscillator.type = type;
+    
+    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+    
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + duration);
+}
+
 // Keyboard events
 document.addEventListener('keydown', (e) => {
     keys[e.key] = true;
@@ -169,6 +202,7 @@ function updateBall() {
     // Ball collision with top and bottom walls
     if (ball.y <= 0 || ball.y + ball.height >= canvas.height) {
         ball.speedY = -ball.speedY;
+        playSound(200, 0.05); // Low beep for wall hit
     }
     
     // Ball collision with player paddle
@@ -180,6 +214,7 @@ function updateBall() {
         // Add slight angle based on where ball hits paddle
         const hitPos = (ball.y - player.y) / player.height;
         ball.speedY = (hitPos - 0.5) * 10 * speedMultiplier;
+        playSound(400, 0.1); // Medium pitch for paddle hit
     }
     
     // Ball collision with AI paddle
@@ -191,15 +226,18 @@ function updateBall() {
         // Add slight angle based on where ball hits paddle
         const hitPos = (ball.y - ai.y) / ai.height;
         ball.speedY = (hitPos - 0.5) * 10 * speedMultiplier;
+        playSound(400, 0.1); // Medium pitch for paddle hit
     }
     
     // Score points
     if (ball.x < 0) {
         ai.score++;
+        playSound(300, 0.15); // Lower pitch for AI score
         resetBall();
     }
     if (ball.x > canvas.width) {
         player.score++;
+        playSound(600, 0.15); // Higher pitch for player score
         resetBall();
     }
 }
