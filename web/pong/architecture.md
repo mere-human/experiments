@@ -54,3 +54,8 @@ You can easily customize:
 - Colors: Update CSS gradient and fill colors
 - AI difficulty: Adjust `ai.speed` multiplier
 
+## TODO:
+
+- Mobile layout.
+- Game over condition.
+- Keyboard is too slow comparing to mouse.
