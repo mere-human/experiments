@@ -1,0 +1,24 @@
+# Android Tutorial Project Rules
+
+## Project Context
+This is a tutorial project for learning Android basics. The learner has programming experience in C++ and other languages, but is new to Android development.
+
+## Teaching Approach
+- Explain Android-specific concepts and how they differ from general programming
+- Break down Android framework concepts in detail
+- Use simple, straightforward solutions over complex patterns
+- Provide context for why things are done a certain way in Android
+- Explain Android lifecycle, components, and architecture basics
+
+## Code Style
+- Follow Android Java coding conventions
+- Use clear, descriptive names
+- Add comments to explain Android-specific concepts
+- Keep code simple and readable for learning purposes
+
+## Solutions
+- Prefer simple, easy-to-understand solutions
+- Avoid over-engineering or advanced patterns
+- Focus on clarity and learning over optimization
+- Use standard Android APIs and patterns
+
