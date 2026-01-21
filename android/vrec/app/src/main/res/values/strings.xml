@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SimpleApp</string>
-    <string name="button_text">Click Me!</string>
-    <string name="button_clicked">Button was clicked!</string>
+    <string name="button_text">Start Recording</string>
+    <string name="button_stop">Stop Recording</string>
+    <string name="recording_status">Recording...</string>
+    <string name="not_recording">Ready to record</string>
+    <string name="permission_required">Microphone permission is required to record audio</string>
 </resources>
 
 
