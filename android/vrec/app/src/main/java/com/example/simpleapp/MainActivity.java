@@ -38,10 +38,11 @@ public class MainActivity extends AppCompatActivity {
         statusTextView = findViewById(R.id.textView);
         recordButton = findViewById(R.id.recordButton);
 
+        // Always set up the button - it will check permission when clicked
+        setupButton();
+        
         // Check if we have permission to record audio
-        if (checkPermission()) {
-            setupButton();
-        } else {
+        if (!checkPermission()) {
             // Request permission
             requestPermission();
         }
@@ -73,23 +74,36 @@ public class MainActivity extends AppCompatActivity {
         
         if (requestCode == REQUEST_RECORD_AUDIO_PERMISSION) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted, set up the button
-                setupButton();
+                // Permission granted - button is already set up and ready to use
+                statusTextView.setText(R.string.not_recording);
+                recordButton.setEnabled(true);
             } else {
-                // Permission denied
+                // Permission denied - update UI to reflect this
                 Toast.makeText(this, R.string.permission_required, Toast.LENGTH_LONG).show();
                 statusTextView.setText(R.string.permission_required);
+                // Disable the button since recording won't work without permission
+                recordButton.setEnabled(false);
             }
         }
     }
 
     /**
      * Set up the record button click listener
+     * This method always sets up the button, but checks permission before recording
      */
     private void setupButton() {
         recordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Check permission before attempting to record
+                if (!checkPermission()) {
+                    // Permission not granted - request it
+                    Toast.makeText(MainActivity.this, R.string.permission_required, Toast.LENGTH_SHORT).show();
+                    requestPermission();
+                    return;
+                }
+                
+                // Permission is granted - proceed with recording/stopping
                 if (isRecording) {
                     stopRecording();
                 } else {
