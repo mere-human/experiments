@@ -29,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
     private boolean isRecording = false;
     private String currentRecordingPath;
 
+    // Helper responsible for creating recording file names
+    private final RecordingFileNameGenerator fileNameGenerator = new RecordingFileNameGenerator();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,8 +128,8 @@ public class MainActivity extends AppCompatActivity {
             mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
             mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
             
-            // Generate filename with timestamp
-            String fileName = generateFileName();
+            // Generate filename with timestamp using a testable helper
+            String fileName = fileNameGenerator.generateFileNameNow();
             File outputFile = new File(getFilesDir(), fileName);
             currentRecordingPath = outputFile.getAbsolutePath();
             
@@ -182,16 +185,6 @@ public class MainActivity extends AppCompatActivity {
             mediaRecorder.release();
             mediaRecorder = null;
         }
-    }
-
-    /**
-     * Generate a filename with current date and time
-     * Format: recording_yyyyMMdd_HHmmss.3gp
-     */
-    private String generateFileName() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault());
-        String timestamp = sdf.format(new Date());
-        return "recording_" + timestamp + ".3gp";
     }
 
     /**
