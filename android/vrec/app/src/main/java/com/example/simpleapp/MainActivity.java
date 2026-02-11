@@ -132,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
             // Configure MediaRecorder
             mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
             mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+            mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
             
             // Generate filename with timestamp using a testable helper
             String fileName = fileNameGenerator.generateFileNameNow();
@@ -139,7 +140,6 @@ public class MainActivity extends AppCompatActivity {
             currentRecordingPath = outputFile.getAbsolutePath();
             
             mediaRecorder.setOutputFile(currentRecordingPath);
-            mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
             
             // Prepare and start recording
             mediaRecorder.prepare();
