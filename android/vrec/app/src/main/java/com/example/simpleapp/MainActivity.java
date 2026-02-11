@@ -45,7 +45,12 @@ public class MainActivity extends AppCompatActivity {
         setupButton();
         
         // Check if we have permission to record audio
-        if (!checkPermission()) {
+        if (checkPermission()) {
+            // Permission already granted - enable the button
+            recordButton.setEnabled(true);
+        } else {
+            // Permission not granted - disable button until permission is granted
+            recordButton.setEnabled(false);
             // Request permission
             requestPermission();
         }
