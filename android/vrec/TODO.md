@@ -66,6 +66,13 @@ The app is a basic voice recording application with:
   - Graceful handling of storage write failures
   - Retry mechanisms for transient errors
 
+#### 1.4 Recording Controls
+
+- [ ] Add recording pause button
+  - Allow pausing and resuming an in-progress recording
+  - Ensure recording is saved as a single continuous file
+  - Update UI to indicate paused state
+
 ---
 
 ### Phase 2: Recording Management
@@ -179,6 +186,7 @@ The app is a basic voice recording application with:
 - [ ] Add recording format selection
   - 3GP (current default)
   - MP4/AAC (better quality)
+  - MP3 (widely compatible)
   - WAV (uncompressed, large files)
 - [ ] Add bitrate/quality settings
   - Low, Medium, High quality options
