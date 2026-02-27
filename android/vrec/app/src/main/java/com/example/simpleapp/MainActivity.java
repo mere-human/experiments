@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.media.MediaRecorder;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,10 +25,34 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
     
     private TextView statusTextView;
+    private TextView timerTextView;
     private Button recordButton;
     private MediaRecorder mediaRecorder;
     private boolean isRecording = false;
     private String currentRecordingPath;
+
+    // Timer state for elapsed recording time
+    private final Handler timerHandler = new Handler();
+    private long recordingStartTimeMillis = 0L;
+    private final Runnable timerRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if (!isRecording) {
+                return;
+            }
+
+            long elapsedMillis = System.currentTimeMillis() - recordingStartTimeMillis;
+            int totalSeconds = (int) (elapsedMillis / 1000);
+            int minutes = totalSeconds / 60;
+            int seconds = totalSeconds % 60;
+
+            String formatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+            timerTextView.setText(formatted);
+
+            // Schedule next update in 1 second
+            timerHandler.postDelayed(this, 1000);
+        }
+    };
 
     // Helper responsible for creating recording file names
     private final RecordingFileNameGenerator fileNameGenerator = new RecordingFileNameGenerator();
@@ -39,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Find the views by their IDs
         statusTextView = findViewById(R.id.textView);
+        timerTextView = findViewById(R.id.timerTextView);
         recordButton = findViewById(R.id.recordButton);
 
         // Always set up the button - it will check permission when clicked
@@ -144,9 +170,13 @@ public class MainActivity extends AppCompatActivity {
             // Prepare and start recording
             mediaRecorder.prepare();
             mediaRecorder.start();
-            
-            // Update UI
+
+            // Update UI and start timer
             isRecording = true;
+            recordingStartTimeMillis = System.currentTimeMillis();
+            timerTextView.setText(R.string.recording_timer_initial);
+            timerHandler.removeCallbacks(timerRunnable);
+            timerHandler.postDelayed(timerRunnable, 1000);
             recordButton.setText(R.string.button_stop);
             statusTextView.setText(R.string.recording_status);
             
@@ -161,6 +191,8 @@ public class MainActivity extends AppCompatActivity {
      */
     private void stopRecording() {
         if (mediaRecorder != null) {
+            // Stop timer updates
+            timerHandler.removeCallbacks(timerRunnable);
             try {
                 mediaRecorder.stop();
                 releaseMediaRecorder();
@@ -168,6 +200,7 @@ public class MainActivity extends AppCompatActivity {
                 // Update UI
                 isRecording = false;
                 recordButton.setText(R.string.button_text);
+                timerTextView.setText(R.string.recording_timer_initial);
                 statusTextView.setText(getString(R.string.not_recording) + "\nSaved: " + 
                         new File(currentRecordingPath).getName());
                 
@@ -201,6 +234,7 @@ public class MainActivity extends AppCompatActivity {
         if (isRecording) {
             stopRecording();
         }
+        timerHandler.removeCallbacks(timerRunnable);
         releaseMediaRecorder();
     }
 }

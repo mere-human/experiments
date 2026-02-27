@@ -25,7 +25,7 @@ The app is a basic voice recording application with:
 
 #### 1.1 Live Recording Status Indicators
 
-- [ ] Add recording timer (elapsed time display)
+- ✅ Add recording timer (elapsed time display)
   - Show MM:SS format while recording
   - Update every second using Handler/CountDownTimer
 - [ ] Add audio level visualization

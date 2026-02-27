@@ -6,6 +6,7 @@
     <string name="recording_status">Recording...</string>
     <string name="not_recording">Ready to record</string>
     <string name="permission_required">Microphone permission is required to record audio</string>
+    <string name="recording_timer_initial">00:00</string>
 </resources>
 
 
