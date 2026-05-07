@@ -21,6 +21,15 @@
 - Ability to define or update the emotion list in settings.
 - Simple startup view with emotion selection, today’s entries and/or a recent history.
 
+## MVP emotion icons
+
+- excited: 🤩
+- tender: 🥰
+- scared: 😨
+- angry: 😠
+- sad: 😔
+- happy: 😊
+
 ## MVP data model
 
 - Entry fields: timestamp, emotion id, optional text note.
