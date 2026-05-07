@@ -47,16 +47,6 @@
 - Data privacy: there is no cloud backend in MVP.
 - Responsive on portrait mobile screens.
 
-## Running the app
-
-To run the app locally from the repository root:
-
-1. Open a terminal in the project root directory.
-2. Start a local web server: `python -m http.server 8000`
-3. Open `http://localhost:8000` in your browser
-
-The app entry point is `index.html`. The main application logic lives in `src/app.js`, and the entry creation screen is implemented in `src/screens/EntryScreen.js`.
-
 ## Data model
 
 - Entry: timestamp, emotion id, optional note.
@@ -70,6 +60,7 @@ The app entry point is `index.html`. The main application logic lives in `src/ap
 - Localization for multiple languages.
 - Statistics and charts for emotional trends.
 - Daily summaries and weekly reports.
+- Reminders and notifications.
 
 ## Purpose of this document
 

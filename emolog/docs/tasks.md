@@ -15,6 +15,7 @@
 
 ## Implementation
 
+- move styling to a separate CSS file
 - implement entry creation flow.
 - implement emotion palette and selection.
 - implement local persistence.
