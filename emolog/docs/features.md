@@ -22,6 +22,7 @@
   - offline-first behavior
 
 - Android-friendly UI
+  - easy installation and startup
   - mobile-optimized layout
   - simple navigation
   - readable colors and accessible touch targets
