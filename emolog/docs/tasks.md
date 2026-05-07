@@ -2,8 +2,9 @@
 
 ## Discovery
 
-- confirm target platform: native Android, PWA, or cross-platform.
-- define MVP emotion set and required entry fields.
+- ✓ confirm target platform: PWA
+- ✓ define MVP emotion set and required entry fields.
+- ✓ decide whether export/import is part of MVP (not included)
 
 ## Design
 

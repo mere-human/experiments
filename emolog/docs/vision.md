@@ -35,6 +35,12 @@ Enable people to capture how they feel in a simple way and use that awareness to
 - mobile friendly
 - privacy-focused
 
+## Thoughts
+
+- rules:
+ - update the docs
+ - don't use abs paths
+
 ## Purpose of this document
 
 High level only.
