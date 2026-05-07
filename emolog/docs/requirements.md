@@ -13,13 +13,20 @@
 
 ## Functional requirements
 
-- Emotion selection screen with at least 6 default emotions.
+- Emotion selection screen with the MVP emotion set: excited, tender, scared, angry, sad, happy.
+- Each emotion includes a name and a unicode symbol icon.
 - Entry creation flow that records a timestamp automatically.
 - Entry detail view that shows emotion, note, and time.
-- Local persistence using browser storage and optional JSON export/import.
-- Export/import data via a sync file for backup.
+- Local persistence using browser storage.
 - Ability to define or update the emotion list in settings.
 - Simple startup view with emotion selection, today’s entries and/or a recent history.
+
+## MVP data model
+
+- Entry fields: timestamp, emotion id, optional text note.
+- Emotion fields: id, name, color, unicode icon.
+- Required entry fields: timestamp and emotion id. Note is optional.
+- MVP emotion set: excited, tender, scared, angry, sad, happy.
 
 ## Non-functional requirements
 

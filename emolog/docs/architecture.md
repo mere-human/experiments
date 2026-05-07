@@ -89,7 +89,7 @@ If the app needs a bit more structure later, a tiny UI library such as Preact or
 
 - Use browser local storage or IndexedDB for persistent data.
 - Persist entries and emotion metadata together in a single local state store.
-- Provide export/import of a JSON backup file so users can save or restore data.
+- MVP storage is local only; export/import backup is a future enhancement.
 - On an installed PWA, storage persists across app launches and works offline.
 
 ## Folder structure

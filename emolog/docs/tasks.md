@@ -4,7 +4,6 @@
 
 - confirm target platform: native Android, PWA, or cross-platform.
 - define MVP emotion set and required entry fields.
-- decide whether export/import is part of MVP.
 
 ## Design
 
@@ -19,7 +18,6 @@
 - implement emotion palette and selection.
 - implement local persistence.
 - implement history view with edit/delete.
-- implement backup export/import.
 - implement web manifest and service worker for installable PWA behavior.
 
 ## Testing
