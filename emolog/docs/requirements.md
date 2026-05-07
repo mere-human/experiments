@@ -8,7 +8,7 @@
 - Each emotion includes a name and a colored icon.
 - View a timeline or list of recent entries.
 - Edit or delete entries after they are created.
-- Use the app on Android mobile.
+- Installable as a PWA on Android mobile.
 - The app must work offline and persist data locally.
 
 ## Functional requirements
@@ -16,7 +16,7 @@
 - Emotion selection screen with at least 6 default emotions.
 - Entry creation flow that records a timestamp automatically.
 - Entry detail view that shows emotion, note, and time.
-- Local persistence to a file or local storage.
+- Local persistence using browser storage and optional JSON export/import.
 - Export/import data via a sync file for backup.
 - Ability to define or update the emotion list in settings.
 - Simple startup view with emotion selection, today’s entries and/or a recent history.

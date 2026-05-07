@@ -11,6 +11,7 @@
 - design the emotion selection screen.
 - design the history/timeline view.
 - define the local storage format.
+- design PWA installation flow, manifest, and service worker.
 
 ## Implementation
 
@@ -19,6 +20,7 @@
 - implement local persistence.
 - implement history view with edit/delete.
 - implement backup export/import.
+- implement web manifest and service worker for installable PWA behavior.
 
 ## Testing
 

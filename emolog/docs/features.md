@@ -22,7 +22,7 @@
   - offline-first behavior
 
 - Android-friendly UI
-  - easy installation and startup
+  - smooth PWA installation and startup
   - mobile-optimized layout
   - simple navigation
   - readable colors and accessible touch targets
@@ -31,7 +31,7 @@
 
 - export/import a JSON sync file
 - basic settings (default emotion set, theme)
-- optional web support as a PWA or web app
+- incremental offline improvements and installability polishing
 
 ## Later roadmap
 

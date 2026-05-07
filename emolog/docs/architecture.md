@@ -2,9 +2,13 @@
 
 ## Tech stack
 
-For MVP, a single cross-platform codebase is best. The strongest fit is a web-based Progressive Web App (PWA) that can run in a browser and be installed on Android as an app.
+Selected stack: plain Progressive Web App (PWA) using vanilla JavaScript and standard web APIs.
 
-This avoids maintaining separate native and web apps, keeps the implementation simple, and stays compatible with your JavaScript/TypeScript skill set.
+This approach uses a single codebase for browser and Android installable usage, keeps the implementation readable, and avoids a separate native app. It satisfies the core requirements:
+- offline-first behavior
+- local persistence
+- installable Android experience
+- lightweight and easy to understand
 
 ## Architecture alternatives
 
@@ -15,9 +19,10 @@ This avoids maintaining separate native and web apps, keeps the implementation s
   - Uses standard browser APIs and one codebase for Android and web.
   - Best choice for low-entry developers.
   - Offline support via service worker and local storage.
+  - Smooth install flow via a web app manifest and add-to-home-screen.
 - Cons:
   - Limited access to some native device APIs without wrappers.
-  - Install experience is browser-dependent.
+  - Install experience is browser-dependent, but modern Android browsers handle PWAs well.
 - Complexity: low
 - Scalability: medium for this use case; enough for mood tracking and light features.
 - Development speed: high for MVP.
@@ -54,16 +59,17 @@ This avoids maintaining separate native and web apps, keeps the implementation s
 
 ## Recommended architecture for MVP
 
-A plain PWA with minimal framework or vanilla JavaScript is the best fit.
+A plain PWA with vanilla JavaScript is the selected approach.
 
 Reasons:
 - One codebase, no separate native and web apps.
 - Maximum simplicity and readability.
 - Fast development for a lightweight emotion tracker.
 - Offline-first support is easy to implement with service worker and local persistence.
+- Smooth Android installation using a web app manifest and service worker.
 - It aligns with your existing JavaScript/TypeScript knowledge.
 
-If you want a slightly more structured approach, use a very small UI library such as Preact or Lit to keep components manageable without adding heavy abstractions.
+If the app needs a bit more structure later, a tiny UI library such as Preact or Lit can be added without changing the core architecture.
 
 ## System design
 
@@ -81,9 +87,10 @@ If you want a slightly more structured approach, use a very small UI library suc
 
 ## Storage strategy
 
-- Use browser local storage, IndexedDB, or a local JSON file.
-- Persist entries and emotion metadata together.
-- Use a human-readable JSON structure for export/import.
+- Use browser local storage or IndexedDB for persistent data.
+- Persist entries and emotion metadata together in a single local state store.
+- Provide export/import of a JSON backup file so users can save or restore data.
+- On an installed PWA, storage persists across app launches and works offline.
 
 ## Folder structure
 
