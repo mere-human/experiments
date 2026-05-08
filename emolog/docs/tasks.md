@@ -28,9 +28,15 @@
 - write unit tests for storage and data model.
 - verify offline startup and save behavior.
 - test Android mobile layout and usability.
+- somehow add the integration tests
+
+## Bugs
+
+- delete doesn't work
 
 ## Future
 
+- TypeScript
 - add charts and statistics.
 - add localization support.
 - add optional sync integration.
