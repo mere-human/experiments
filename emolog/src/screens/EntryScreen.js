@@ -30,6 +30,7 @@ export class EntryScreen {
         max-width: 480px;
         margin: 0 auto;
         padding: 20px;
+        padding-bottom: 100px; /* Space for nav bar */
         display: flex;
         flex-direction: column;
         gap: 16px;

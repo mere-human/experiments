@@ -15,8 +15,9 @@
 
 ## Implementation
 
-- move styling to a separate CSS file
-- implement entry creation flow.
+- ✓ implement navigation logic to switch between EntryScreen and HistoryScreen
+- move styling to a separate CSS file?
+- ✓ implement entry creation flow.
 - implement emotion palette and selection.
 - ✓ implement local persistence.
 - ✓ implement history view with edit/delete.

@@ -24,7 +24,6 @@ export class HistoryScreen {
       emptyState.className = 'empty-state';
       emptyState.innerHTML = `
         <p>No emotion entries yet. Start tracking by logging your first emotion!</p>
-        <button id="go-to-log">Log Emotion</button>
       `;
       container.appendChild(emptyState);
     } else {
@@ -54,6 +53,7 @@ export class HistoryScreen {
         max-width: 480px;
         margin: 0 auto;
         padding: 20px;
+        padding-bottom: 100px; /* Space for nav bar */
         display: flex;
         flex-direction: column;
         gap: 16px;
@@ -139,21 +139,6 @@ export class HistoryScreen {
         text-align: center;
         padding: 40px 20px;
         color: #6b7280;
-      }
-
-      .empty-state button {
-        margin-top: 16px;
-        padding: 12px 20px;
-        border: none;
-        border-radius: 12px;
-        background: #2563eb;
-        color: #fff;
-        font-size: 1rem;
-        cursor: pointer;
-      }
-
-      .empty-state button:hover {
-        background: #1d4ed8;
       }
 
       .edit-modal {
@@ -331,9 +316,6 @@ export class HistoryScreen {
         this.closeEditModal();
       } else if (e.target.classList.contains('save-btn')) {
         this.saveEdit(container);
-      } else if (e.target.id === 'go-to-log') {
-        // For now, just alert; later implement navigation
-        alert('Navigation to log screen not implemented yet.');
       }
     });
   }
