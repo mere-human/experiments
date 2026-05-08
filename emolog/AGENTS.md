@@ -8,6 +8,7 @@ Before implementing a feature:
 4. Inspect existing implementation patterns
 5. Identify constraints before coding
 6. Summarize requirements before implementation
+7. Keep implementations minimal - only implement what's needed for the current task, avoid adding unused code or future-proofing
 
 After implementing a feature:
 
