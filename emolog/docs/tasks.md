@@ -18,8 +18,8 @@
 - move styling to a separate CSS file
 - implement entry creation flow.
 - implement emotion palette and selection.
-- implement local persistence.
-- implement history view with edit/delete.
+- ✓ implement local persistence.
+- ✓ implement history view with edit/delete.
 - implement web manifest and service worker for installable PWA behavior.
 
 ## Testing

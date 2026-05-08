@@ -40,6 +40,7 @@ Enable people to capture how they feel in a simple way and use that awareness to
 - rules:
  - update the docs
  - don't use abs paths
+- add Chrome DevTools MCP
 
 ## Purpose of this document
 
