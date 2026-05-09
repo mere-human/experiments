@@ -45,6 +45,11 @@
 			"label": "Run tests",
 			"type": "shell",
 			"command": "npm test"
+		},
+		{
+			"label": "Run Jest tests",
+			"type": "shell",
+			"command": "npm test -- --runInBand"
 		}
 	]
 }
