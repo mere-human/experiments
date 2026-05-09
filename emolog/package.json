@@ -1,0 +1,17 @@
+{
+  "name": "emolog",
+  "version": "1.0.0",
+  "description": "Emotion logging PWA",
+  "type": "module",
+  "main": "index.html",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.0",
+    "@babel/preset-env": "^7.23.0",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
+  }
+}

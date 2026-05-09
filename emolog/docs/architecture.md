@@ -117,6 +117,13 @@ Suggested structure:
 - Unit tests for the data model and storage logic.
 - Tests for entry creation, editing, deletion, and persistence.
 - If using a web stack, add test coverage for storage and core business rules.
+- Use Jest as the test runner with `jest-environment-jsdom` so browser APIs like `localStorage` and `window` are available in Node-based tests.
+- Use Babel (`@babel/preset-env` + `babel-jest`) to transform ES module syntax (`import` / `export`) for Jest when the project uses modern `.js` files and `type: "module"`.
+
+### Running tests
+
+- Install dependencies with `npm install`.
+- Run tests with `npm test`.
 
 ## API style
 
