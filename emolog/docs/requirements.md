@@ -46,6 +46,7 @@
 - Offline-first behavior by default.
 - Data privacy: there is no cloud backend in MVP.
 - Responsive on portrait mobile screens.
+- Basic unit tests coverage of essential functionality to minimize bugs and regressions.
 
 ## Data model
 
