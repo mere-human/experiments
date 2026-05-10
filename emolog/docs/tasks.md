@@ -21,7 +21,7 @@
 - implement emotion palette and selection.
 - ✓ implement local persistence.
 - ✓ implement history view with edit/delete.
-- implement web manifest and service worker for installable PWA behavior.
+- ✓ implement web manifest and service worker for installable PWA behavior.
 
 ## Testing
 
@@ -40,6 +40,7 @@
 ## Bugs
 
 - delete doesn't work
+- PWA doesn't work on Android when offline
 
 ## Future
 

@@ -3,10 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#6200ee">
+  <meta name="description" content="A simple emotion tracking app for logging your daily emotions">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%236200ee' width='192' height='192'/><text x='50%' y='50%' font-size='120' dominant-baseline='middle' text-anchor='middle' fill='white' font-family='Arial'>😊</text></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%236200ee' width='192' height='192' rx='45'/><text x='50%' y='50%' font-size='120' dominant-baseline='middle' text-anchor='middle' fill='white' font-family='Arial'>😊</text></svg>">
   <title>EmoLog</title>
 </head>
 <body>
   <div id="app"></div>
   <script type="module" src="src/app.js"></script>
+  <script>
+    // Register service worker for offline support and PWA functionality
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then((registration) => {
+            console.log('Service Worker registered:', registration);
+          })
+          .catch((error) => {
+            console.warn('Service Worker registration failed:', error);
+          });
+      });
+    } else {
+      console.warn('Service Workers are not supported in this browser.');
+    }
+  </script>
 </body>
 </html>
