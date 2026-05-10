@@ -22,6 +22,7 @@
 - ✓ implement local persistence.
 - ✓ implement history view with edit/delete.
 - ✓ implement web manifest and service worker for installable PWA behavior.
+- fix PWA to work when served from GitHub pages
 - implement dev https server that is served locally and works in desktop browsers.
 - update dev https server so that it can be accessed by the Android mobile in the same local network.
 - add build ID or commit and/or date to the page so that the user knows.
@@ -47,6 +48,7 @@
 
 ## Future
 
+- README for users, setup/build and references to other docs
 - nav bar is too loud
 - TypeScript
 - add charts and statistics.
