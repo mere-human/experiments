@@ -20,6 +20,7 @@
 - Local persistence using browser storage.
 - Ability to define or update the emotion list in settings.
 - Simple startup view with emotion selection, today’s entries and/or a recent history.
+- User should know which build is served to them from the page.
 
 ## MVP emotion icons
 

@@ -16,12 +16,15 @@
 ## Implementation
 
 - ✓ implement navigation logic to switch between EntryScreen and HistoryScreen
-- move styling to a separate CSS file?
+- refactor: separate CSS styling from logic
 - ✓ implement entry creation flow.
 - implement emotion palette and selection.
 - ✓ implement local persistence.
 - ✓ implement history view with edit/delete.
 - ✓ implement web manifest and service worker for installable PWA behavior.
+- implement dev https server that is served locally and works in desktop browsers.
+- update dev https server so that it can be accessed by the Android mobile in the same local network.
+- add build ID or commit and/or date to the page so that the user knows.
 
 ## Testing
 
