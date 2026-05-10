@@ -1,7 +1,7 @@
 import { EntryScreen } from './screens/EntryScreen.js';
 import { HistoryScreen } from './screens/HistoryScreen.js';
 
-class App {
+export class App {
   constructor() {
     this.appElement = document.getElementById('app');
     this.currentScreen = 'entry'; // 'entry' or 'history'
