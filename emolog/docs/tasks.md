@@ -40,7 +40,7 @@
 ## Bugs
 
 - delete doesn't work
-- PWA doesn't work on Android when offline
+- ✓ PWA doesn't work on Android when offline (fixed: improved service worker caching and fetch strategy)
 
 ## Future
 

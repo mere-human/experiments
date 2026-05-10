@@ -9,24 +9,109 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%236200ee' width='192' height='192'/><text x='50%' y='50%' font-size='120' dominant-baseline='middle' text-anchor='middle' fill='white' font-family='Arial'>😊</text></svg>">
   <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%236200ee' width='192' height='192' rx='45'/><text x='50%' y='50%' font-size='120' dominant-baseline='middle' text-anchor='middle' fill='white' font-family='Arial'>😊</text></svg>">
   <title>EmoLog</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    .error-display {
+      display: none;
+      padding: 20px;
+      margin: 20px;
+      background: #fee;
+      border: 2px solid #c33;
+      border-radius: 8px;
+      color: #333;
+      font-family: monospace;
+      font-size: 12px;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .error-display.visible {
+      display: block;
+    }
+  </style>
 </head>
 <body>
+  <div id="error-container" class="error-display"></div>
   <div id="app"></div>
-  <script type="module" src="src/app.js"></script>
+  
+  <script>
+    // Global error display for debugging
+    window.errorLog = [];
+    
+    function logError(msg) {
+      const timestamp = new Date().toLocaleTimeString();
+      const logEntry = `[${timestamp}] ${msg}`;
+      window.errorLog.push(logEntry);
+      console.error(logEntry);
+      
+      const errorContainer = document.getElementById('error-container');
+      errorContainer.classList.add('visible');
+      errorContainer.textContent = window.errorLog.join('\n');
+    }
+    
+    function logInfo(msg) {
+      const timestamp = new Date().toLocaleTimeString();
+      const logEntry = `[${timestamp}] ${msg}`;
+      console.log(logEntry);
+    }
+
+    // Catch all uncaught errors
+    window.addEventListener('error', (event) => {
+      logError(`UNCAUGHT ERROR: ${event.message}\nat ${event.filename}:${event.lineno}:${event.colno}`);
+    });
+
+    // Catch unhandled promise rejections
+    window.addEventListener('unhandledrejection', (event) => {
+      logError(`UNHANDLED REJECTION: ${event.reason}`);
+    });
+
+    logInfo('Page loaded, initializing app...');
+  </script>
+
+  <script type="module">
+    import { App } from './src/app.js';
+
+    async function initializeApp() {
+      try {
+        window.logInfo('App module imported');
+        const app = new App();
+        window.logInfo('App instance created');
+        app.render();
+        window.logInfo('App rendered successfully');
+      } catch (err) {
+        window.logError(`App initialization failed: ${err.message}\n${err.stack}`);
+      }
+    }
+
+    // Wait for DOM to be ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeApp);
+    } else {
+      initializeApp();
+    }
+  </script>
+
   <script>
     // Register service worker for offline support and PWA functionality
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js')
+        window.logInfo('Registering Service Worker...');
+        navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
           .then((registration) => {
-            console.log('Service Worker registered:', registration);
+            window.logInfo('SW registered successfully');
+            // Check for updates periodically
+            setInterval(() => {
+              registration.update();
+            }, 60000); // Check every minute
           })
           .catch((error) => {
-            console.warn('Service Worker registration failed:', error);
+            window.logError(`SW registration failed: ${error.message}`);
           });
       });
     } else {
-      console.warn('Service Workers are not supported in this browser.');
+      window.logError('Service Workers not supported in this browser');
     }
   </script>
 </body>
