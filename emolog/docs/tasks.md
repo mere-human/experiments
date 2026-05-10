@@ -29,7 +29,7 @@
 - ✓ Write unit tests for storage service (LocalStorageService), with localStorage mocking.
 - ✓ Setup jsdom for DOM tests.
 - ✓ Write unit tests for app navigation logic (App class).
-- Write unit/component tests for UI screens (EntryScreen, HistoryScreen) using Testing Library.
+- ✓ Write unit/component tests for UI screens (EntryScreen, HistoryScreen) using Testing Library.
 - Add integration tests for end-to-end flows (create/save/load/display entries).
 - Verify offline startup and save behavior.
 - Test Android mobile layout and usability.
