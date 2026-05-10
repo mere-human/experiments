@@ -34,6 +34,8 @@
 - Verify offline startup and save behavior.
 - Test Android mobile layout and usability.
 - Add test coverage reporting and CI integration.
+- Extract yesterday to utils
+- Emotion ID enum
 
 ## Bugs
 
